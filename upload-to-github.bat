@@ -35,10 +35,18 @@ if errorlevel 1 goto done
 echo.
 echo Pushing commits to GitHub...
 git push -u origin main
-if errorlevel 1 goto done
+if errorlevel 1 goto push_failed
 
 echo.
 echo Upload complete.
+goto done
+
+:push_failed
+echo.
+echo GitHub upload failed.
+echo If GitHub asks for a username, enter: Emilia3213
+echo If GitHub asks for a password, enter a GitHub Personal Access Token, not your Google password.
+echo You may also need to sign in through the browser window opened by Git Credential Manager.
 
 :done
 echo.
