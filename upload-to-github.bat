@@ -21,8 +21,8 @@ for %%A in ("%TEMP%\upload-to-github-status.txt") do set "statusSize=%%~zA"
 del "%TEMP%\upload-to-github-status.txt" >nul 2>&1
 
 if "%statusSize%"=="0" (
-    echo No changes to upload.
-    goto done
+    echo No file changes to commit.
+    goto push
 )
 
 git add .
@@ -31,6 +31,9 @@ if errorlevel 1 goto done
 git commit -m "Auto upload"
 if errorlevel 1 goto done
 
+:push
+echo.
+echo Pushing commits to GitHub...
 git push -u origin main
 if errorlevel 1 goto done
 
